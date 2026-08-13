@@ -65,4 +65,14 @@ chmod a+x download.sh
 ./download.sh <URL> <ARTIST> <SONG> <ALBUM>
 ```
 
+Example:
+
+```bash
+./download.sh \
+"https://youtu.be/kXYiU_JCYtU?si=t3-3H9oMMdyO-YgD" \
+"Linkin Park" \
+"Numb" \
+"Meteora"
+```
+
 > `ALBUM` is optional. If omitted, it defaults to `Unknown`.
