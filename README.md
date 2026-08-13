@@ -59,11 +59,27 @@ Give permission to `download.sh` file:
 chmod a+x download.sh
 ```
 
+## 📂 Output Directory
+
+By default, downloaded songs are saved to:
+
+```text
+~/music
+
 # 🎶 Usage
 
 ```bash
 ./download.sh <URL> <ARTIST> <SONG> <ALBUM>
 ```
+
+To change the output location, edit `download.sh`:
+
+```bash
+# Change this to the directory where you want downloaded songs to be saved
+OUTPUT_DIR="$HOME/music"
+```
+
+## Usage
 
 Example:
 
