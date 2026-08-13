@@ -34,3 +34,35 @@ If you don't have Homebrew installed:
 
 ```bash
 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+```
+
+Then install the dependencies:
+
+```bash
+brew install python deno ffmpeg
+python3 -m pip install -U yt-dlp
+```
+
+Verify everything:
+
+```bash
+python3 --version
+yt-dlp --version
+ffmpeg -version
+ffprobe -version
+deno --version
+```
+
+Give permission to `download.sh` file:
+
+```bash
+chmod a+x download.sh
+```
+
+# 🎶 Usage
+
+```bash
+./download.sh <URL> <ARTIST> <SONG> <ALBUM>
+```
+
+> `ALBUM` is optional. If omitted, it defaults to `Unknown`.
