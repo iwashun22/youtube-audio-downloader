@@ -11,7 +11,8 @@ if [ -z "$URL" ] || [ -z "$ARTIST" ] || [ -z "$TITLE" ]; then
 fi
 
 FILENAME="${ARTIST} - ${TITLE}"
-OUTPUT_DIR="$HOME/workspace/music/dl"
+OUTPUT_DIR="$HOME/music"
+mkdir -p "$OUTPUT_DIR"
 
 yt-dlp \
     --remote-components ejs:github \
