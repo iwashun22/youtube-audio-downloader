@@ -11,6 +11,8 @@ if [ -z "$URL" ] || [ -z "$ARTIST" ] || [ -z "$TITLE" ]; then
 fi
 
 FILENAME="${ARTIST} - ${TITLE}"
+
+# Change this to the directory where you want downloaded songs to be saved
 OUTPUT_DIR="$HOME/music"
 mkdir -p "$OUTPUT_DIR"
 
