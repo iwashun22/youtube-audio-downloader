@@ -10,11 +10,20 @@ if [ -z "$URL" ] || [ -z "$ARTIST" ] || [ -z "$TITLE" ]; then
     exit 1
 fi
 
+TEMP_DIR=$(mktemp -d)
 FILENAME="${ARTIST} - ${TITLE}"
+
+
 
 # Change this to the directory where you want downloaded songs to be saved
 OUTPUT_DIR="$HOME/music"
-mkdir -p "$OUTPUT_DIR"
+OUTPUT_FILE="${OUTPUT_DIR}/${FILENAME}.opus"
+
+
+
+# Remove temporary directory when the script exits
+trap 'rm -rf "$TEMP_DIR"' EXIT
+FILENAME="${ARTIST} - ${TITLE}"
 
 yt-dlp \
     --remote-components ejs:github \
@@ -22,24 +31,20 @@ yt-dlp \
     -f "bestaudio[acodec=opus]" \
     -x \
     --audio-format opus \
-		--parse-metadata "artist:${ARTIST}" \
-    --parse-metadata "title:${TITLE}" \
-    -o "${OUTPUT_DIR}/${FILENAME}.%(ext)s" \
+    -o "${TEMP_DIR}/audio.%(ext)s" \
     "$URL"
 
 # Add metadata without re-encoding the audio
-TEMP_FILE="${OUTPUT_DIR}/.${FILENAME}.tmp.opus"
-
 ffmpeg \
-    -i "${OUTPUT_DIR}/${FILENAME}.opus" \
+    -i "${TEMP_DIR}/audio.opus" \
     -map 0:a \
     -c:a copy \
     -metadata "artist=${ARTIST}" \
     -metadata "title=${TITLE}" \
-		-metadata "album=${ALBUM}" \
+                -metadata "album=${ALBUM}" \
     -y \
-    "$TEMP_FILE" \
-&& mv "$TEMP_FILE" "${OUTPUT_DIR}/${FILENAME}.opus"
+    "${TEMP_DIR}/final.opus" \
+&& mv "${TEMP_DIR}/final.opus" "${OUTPUT_FILE}"
 
 # Colors
 CYAN='\033[38;5;81m'
