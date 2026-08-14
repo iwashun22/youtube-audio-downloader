@@ -23,7 +23,6 @@ OUTPUT_FILE="${OUTPUT_DIR}/${FILENAME}.opus"
 
 # Remove temporary directory when the script exits
 trap 'rm -rf "$TEMP_DIR"' EXIT
-FILENAME="${ARTIST} - ${TITLE}"
 
 yt-dlp \
     --remote-components ejs:github \
