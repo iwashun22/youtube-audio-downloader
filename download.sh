@@ -40,7 +40,7 @@ ffmpeg \
     -c:a copy \
     -metadata "artist=${ARTIST}" \
     -metadata "title=${TITLE}" \
-                -metadata "album=${ALBUM}" \
+    -metadata "album=${ALBUM}" \
     -y \
     "${TEMP_DIR}/final.opus" \
 && mv "${TEMP_DIR}/final.opus" "${OUTPUT_FILE}"
